@@ -1,0 +1,30 @@
+{
+    "ActiveMonitor": -1,
+    "ActiveSim": 2,
+    "MousePassthrough": true,
+    "SandSimConfig": {
+        "AirResistance": 1.0,
+        "BrushRadius": 10.0,
+        "DensityRampRate": 40.0,
+        "Gravity": 0.05,
+        "HoldDelay": 0.15,
+        "HoldDelayTimer": 0.0,
+        "HueCycleSpeed": 2.0,
+        "MaxDensity": 30,
+        "MaxFallSpeed": 5.0,
+        "MouseHoldTime": 0.0,
+        "SettleThreshold": 5.0
+    },
+    "SnowSimConfig": {
+        "FadeDelay": 180.0,
+        "FadeSpeed": 0.05,
+        "MaxFlakeSize": 6,
+        "MinFlakeSize": 1,
+        "MouseAvoidRadius": 75.0,
+        "MouseAvoidStrength": 6.0,
+        "SpawnInterval": 0.01
+    },
+    "TargetFPS": 60,
+    "TopMost": true,
+    "TaskbarAware": true
+}
