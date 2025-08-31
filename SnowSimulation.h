@@ -183,7 +183,13 @@ public:
         }
         staticFlakes.erase(
             std::remove_if(staticFlakes.begin(), staticFlakes.end(),
-                [](const Snowflake& f) { return f.alpha <= 0.0f; }),
+                [&](const Snowflake& f) {
+                    if (f.alpha <= 0.0f) {
+                        occupancy[f.gridIndex] = 0; // clear occupancy only when removing
+                        return true;
+                    }
+                    return false;
+                }),
             staticFlakes.end()
         );
     }

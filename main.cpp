@@ -20,12 +20,12 @@ int main() {
     bool topmost = config.TopMost;
 
     SetConfigFlags(FLAG_WINDOW_TRANSPARENT);
-    InitWindow(1, 1, "Raylib Window");
+    InitWindow(3440, 1440, "Raylib Window");
     SetWindowState(FLAG_WINDOW_UNDECORATED);
     int display = (config.ActiveMonitor == -1 ? GetCurrentMonitor() : config.ActiveMonitor);
     auto monitorPos = GetMonitorPosition(display);
-    int screenWidth = GetMonitorWidth(display);
-    int screenHeight = GetMonitorHeight(display);
+    int screenWidth = GetMonitorWidth(display) - 1;
+    int screenHeight = GetMonitorHeight(display) - 1;
 	SetWindowSize(screenWidth, screenHeight);
     SetWindowPosition((int)monitorPos.x, (int)monitorPos.y);
     SetTargetFPS(60);
