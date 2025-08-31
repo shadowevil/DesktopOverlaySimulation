@@ -47,8 +47,6 @@ int main() {
 
     hotkey.Start();
 
-    config.ActiveSim = ActiveSimulation::Fireworks;
-
     std::unique_ptr<ISimulation> sim;
 	switch ((ActiveSimulation)config.ActiveSim) {
 	case ActiveSimulation::Sand:

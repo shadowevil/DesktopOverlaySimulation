@@ -177,14 +177,35 @@ inline Vector2 GetCursorPosition() {
     return Vector2{ (float)p.x, (float)p.y };
 }
 
-inline bool IsMouseButtonPressedGlobal(int button) {
+inline bool IsMouseButtonDownGlobal(int button) {
     SHORT state = 0;
     switch (button) {
         case MOUSE_LEFT_BUTTON:  state = GetAsyncKeyState(VK_LBUTTON); break;
         case MOUSE_RIGHT_BUTTON: state = GetAsyncKeyState(VK_RBUTTON); break;
         case MOUSE_MIDDLE_BUTTON: state = GetAsyncKeyState(VK_MBUTTON); break;
     }
-    return (state & 0x8000) != 0; // high bit means key is down
+    return (state & 0x8000) != 0; // high bit = key down
+}
+
+inline bool IsMouseButtonUpGlobal(int button) {
+    return !IsMouseButtonDownGlobal(button);
+}
+
+// Track previous state per button
+inline bool IsMouseButtonPressedGlobal(int button) {
+    static bool prev[3] = {false, false, false};
+    bool now = IsMouseButtonDownGlobal(button);
+    bool pressed = (now && !prev[button]);
+    prev[button] = now;
+    return pressed;
+}
+
+inline bool IsMouseButtonReleasedGlobal(int button) {
+    static bool prev[3] = {false, false, false};
+    bool now = IsMouseButtonDownGlobal(button);
+    bool released = (!now && prev[button]);
+    prev[button] = now;
+    return released;
 }
 
 #include <atomic>
