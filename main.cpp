@@ -5,6 +5,7 @@
 #include "Config.h"
 #include "SandSimulation.h"
 #include "SnowSimulation.h"
+#include "FireworksSimulation.h"
 
 // Random generator
 std::random_device rd;
@@ -20,7 +21,7 @@ int main() {
     bool topmost = config.TopMost;
 
     SetConfigFlags(FLAG_WINDOW_TRANSPARENT);
-    InitWindow(3440, 1440, "Raylib Window");
+    InitWindow(1, 1, "Raylib Window");
     SetWindowState(FLAG_WINDOW_UNDECORATED);
     int display = (config.ActiveMonitor == -1 ? GetCurrentMonitor() : config.ActiveMonitor);
     auto monitorPos = GetMonitorPosition(display);
@@ -46,7 +47,8 @@ int main() {
 
     hotkey.Start();
 
-	//SandSimulation sim;
+    config.ActiveSim = ActiveSimulation::Fireworks;
+
     std::unique_ptr<ISimulation> sim;
 	switch ((ActiveSimulation)config.ActiveSim) {
 	case ActiveSimulation::Sand:
@@ -55,6 +57,9 @@ int main() {
 	case ActiveSimulation::Snow:
 		sim = std::make_unique<SnowSimulation>();
 		break;
+    case ActiveSimulation::Fireworks:
+        sim = std::make_unique<FireworksSimulation>();
+        break;
 	default:
 		sim = std::make_unique<SandSimulation>();
 		break;

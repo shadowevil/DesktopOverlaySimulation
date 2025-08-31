@@ -177,6 +177,16 @@ inline Vector2 GetCursorPosition() {
     return Vector2{ (float)p.x, (float)p.y };
 }
 
+inline bool IsMouseButtonPressedGlobal(int button) {
+    SHORT state = 0;
+    switch (button) {
+        case MOUSE_LEFT_BUTTON:  state = GetAsyncKeyState(VK_LBUTTON); break;
+        case MOUSE_RIGHT_BUTTON: state = GetAsyncKeyState(VK_RBUTTON); break;
+        case MOUSE_MIDDLE_BUTTON: state = GetAsyncKeyState(VK_MBUTTON); break;
+    }
+    return (state & 0x8000) != 0; // high bit means key is down
+}
+
 #include <atomic>
 #include <functional>
 #include <vector>

@@ -10,7 +10,8 @@ const std::filesystem::path config_file_path = "config.json";
 
 enum class ActiveSimulation {
 	Sand = 1,
-	Snow = 2
+	Snow = 2,
+	Fireworks = 3
 };
 
 struct SandSimulationConfig {

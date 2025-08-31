@@ -9,5 +9,6 @@
     <ClInclude Include="SnowSimulation.h" />
     <ClInclude Include="Simulation.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="FireworksSimulation.h" />
   </ItemGroup>
 </Project>

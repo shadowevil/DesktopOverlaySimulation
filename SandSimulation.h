@@ -3,6 +3,8 @@
 #include "Config.h"
 #include "Helper.h"
 #include "Simulation.h"
+#include <vector>
+#include <random>
 
 extern ConfigManager configManager;
 
