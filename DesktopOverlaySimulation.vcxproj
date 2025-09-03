@@ -150,11 +150,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config.h" />
+    <ClInclude Include="DrawingSimulation.h" />
     <ClInclude Include="FireworksSimulation.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="SandSimulation.h" />
     <ClInclude Include="Helper.h" />
     <ClInclude Include="Simulation.h" />
     <ClInclude Include="SnowSimulation.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DesktopOverlay.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

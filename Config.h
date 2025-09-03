@@ -11,7 +11,8 @@ const std::filesystem::path config_file_path = "config.json";
 enum class ActiveSimulation {
 	Sand = 1,
 	Snow = 2,
-	Fireworks = 3
+	Fireworks = 3,
+	Drawing = 4
 };
 
 struct SandSimulationConfig {
@@ -41,6 +42,16 @@ struct SnowSimulationConfig {
 	float MouseAvoidStrength = 6.0f;        // mouse avoidance force
 };
 
+struct DrawingSimulationConfig {
+	int defaultBrushSize = 5;
+	int minBrushSize = 1;
+	int maxBrushSize = 50;
+	float highlighterAlpha = 0.4f;
+
+	// Preset color palette
+	std::vector<Color> presetColors = { RED, GREEN, BLUE, YELLOW, PURPLE, ORANGE, PINK, SKYBLUE, DARKGREEN, WHITE };
+};
+
 struct Config {
 	int ActiveMonitor = -1; // -1 means current monitor
 	bool MousePassthrough = true;
@@ -50,6 +61,7 @@ struct Config {
 	ActiveSimulation ActiveSim = ActiveSimulation::Sand;
 	SnowSimulationConfig SnowSimConfig = {};
 	SandSimulationConfig SandSimConfig = {};
+	DrawingSimulationConfig DrawingSimConfig = {};
 };
 
 class ConfigManager {
@@ -66,7 +78,7 @@ public:
 	}
 
 
-	Config GetConfig() const { return config; }
+	Config* GetConfig() { return &config; }
 
 	void SaveConfig() {
 		json j;
@@ -94,6 +106,21 @@ public:
 		j["SandSimConfig"]["MaxFallSpeed"] = config.SandSimConfig.MaxFallSpeed;
 		j["SandSimConfig"]["AirResistance"] = config.SandSimConfig.AirResistance;
 		j["SandSimConfig"]["SettleThreshold"] = config.SandSimConfig.SettleThreshold;
+		j["DrawingSimConfig"]["defaultBrushSize"] = config.DrawingSimConfig.defaultBrushSize;
+		j["DrawingSimConfig"]["minBrushSize"] = config.DrawingSimConfig.minBrushSize;
+		j["DrawingSimConfig"]["maxBrushSize"] = config.DrawingSimConfig.maxBrushSize;
+		j["DrawingSimConfig"]["highlighterAlpha"] = config.DrawingSimConfig.highlighterAlpha;
+		j["DrawingSimConfig"]["presetColors"] = json::array();
+
+		for (const auto& c : config.DrawingSimConfig.presetColors) {
+			std::string colorStr =
+				std::to_string(c.r) + "," +
+				std::to_string(c.g) + "," +
+				std::to_string(c.b) + "," +
+				std::to_string(c.a);
+
+			j["DrawingSimConfig"]["presetColors"].push_back(colorStr);
+		}
 
 		std::ofstream file(config_file_path);
 		if (file.is_open()) {
@@ -132,6 +159,18 @@ public:
 				config.SandSimConfig.MaxFallSpeed = j["SandSimConfig"].value("MaxFallSpeed", 5.0f);
 				config.SandSimConfig.AirResistance = j["SandSimConfig"].value("AirResistance", 0.99f);
 				config.SandSimConfig.SettleThreshold = j["SandSimConfig"].value("SettleThreshold", 5.0f);
+				config.DrawingSimConfig.defaultBrushSize = j["DrawingSimConfig"].value("defaultBrushSize", 5);
+				config.DrawingSimConfig.minBrushSize = j["DrawingSimConfig"].value("minBrushSize", 1);
+				config.DrawingSimConfig.maxBrushSize = j["DrawingSimConfig"].value("maxBrushSize", 50);
+				config.DrawingSimConfig.highlighterAlpha = j["DrawingSimConfig"].value("highlighterAlpha", 0.4f);
+				config.DrawingSimConfig.presetColors.clear();
+				for (const auto& colorStr : j["DrawingSimConfig"]["presetColors"]) {
+					std::string str = colorStr.get<std::string>();
+					int r, g, b, a;
+					if (sscanf_s(str.c_str(), "%d,%d,%d,%d", &r, &g, &b, &a) == 4) {
+						config.DrawingSimConfig.presetColors.push_back({ (unsigned char)r, (unsigned char)g, (unsigned char)b, (unsigned char)a });
+					}
+				}
 
 				file.close();
 			}

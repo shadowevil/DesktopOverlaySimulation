@@ -66,7 +66,7 @@ public:
         WindowTitle = "Snow Simulation - F2: Toggle Click-Through, Ctrl+Y: Toggle Topmost";
         SetWindowTitle(WindowTitle.c_str());
 
-		config = configManager.GetConfig().SnowSimConfig;
+		config = configManager.GetConfig()->SnowSimConfig;
     }
 
     ~SnowSimulation() {
@@ -78,7 +78,7 @@ public:
 		height = GetScreenHeight();
 
         int taskbar_height = height;
-        if (configManager.GetConfig().TaskbarAware)
+        if (configManager.GetConfig()->TaskbarAware)
             taskbar_height -= configManager.GetTaskbarHeight();
         else taskbar_height -= 1;
 

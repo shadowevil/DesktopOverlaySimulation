@@ -57,7 +57,7 @@ public:
 
 		SetWindowTitle(WindowTitle.c_str());
 
-        config = configManager.GetConfig().SandSimConfig;
+        config = configManager.GetConfig()->SandSimConfig;
     }
 
 	~SandSimulation() {
@@ -207,7 +207,7 @@ public:
         height = GetScreenHeight();
 
         taskbar_height = height;
-        if (configManager.GetConfig().TaskbarAware)
+        if (configManager.GetConfig()->TaskbarAware)
             taskbar_height -= configManager.GetTaskbarHeight();
         else taskbar_height -= 1;
 

@@ -1,13 +1,31 @@
 {
     "ActiveMonitor": -1,
-    "ActiveSim": 2,
-    "MousePassthrough": true,
+    "ActiveSim": 1,
+    "DrawingSimConfig": {
+        "defaultBrushSize": 5,
+        "highlighterAlpha": 0.4000000059604645,
+        "maxBrushSize": 50,
+        "minBrushSize": 1,
+        "presetColors": [
+            "230,41,55,255",
+            "0,228,48,255",
+            "0,121,241,255",
+            "253,249,0,255",
+            "200,122,255,255",
+            "255,161,0,255",
+            "255,109,194,255",
+            "102,191,255,255",
+            "0,117,44,255",
+            "255,255,255,255"
+        ]
+    },
+    "MousePassthrough": false,
     "SandSimConfig": {
-        "AirResistance": 1.0,
+        "AirResistance": 0.9900000095367432,
         "BrushRadius": 10.0,
         "DensityRampRate": 40.0,
-        "Gravity": 0.05,
-        "HoldDelay": 0.15,
+        "Gravity": 0.05000000074505806,
+        "HoldDelay": 0.15000000596046448,
         "HoldDelayTimer": 0.0,
         "HueCycleSpeed": 2.0,
         "MaxDensity": 30,
@@ -17,14 +35,14 @@
     },
     "SnowSimConfig": {
         "FadeDelay": 180.0,
-        "FadeSpeed": 0.05,
+        "FadeSpeed": 0.05000000074505806,
         "MaxFlakeSize": 6,
         "MinFlakeSize": 1,
         "MouseAvoidRadius": 75.0,
         "MouseAvoidStrength": 6.0,
-        "SpawnInterval": 0.01
+        "SpawnInterval": 0.009999999776482582
     },
     "TargetFPS": 60,
-    "TopMost": true,
-    "TaskbarAware": true
+    "TaskbarAware": true,
+    "TopMost": true
 }

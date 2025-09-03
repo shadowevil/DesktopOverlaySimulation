@@ -10,5 +10,13 @@
     <ClInclude Include="Simulation.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="FireworksSimulation.h" />
+    <ClInclude Include="DrawingSimulation.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DesktopOverlay.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
   </ItemGroup>
 </Project>
